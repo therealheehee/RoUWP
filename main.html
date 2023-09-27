@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoUWP</title>
+    <style>
+/* fortnite battle pass 😔🙏 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.join-button {
+  background-image: linear-gradient(to right, #333333 0%, #333333 100%);
+  color: #FFFFFF;
+  border: 2px solid #e0e0e0;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), inset 0 -2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+  margin-bottom: 20px;
+}
+
+.join-button:hover {
+  background-image: linear-gradient(to right, #008c5a 0%, #00B06F 100%);
+  transform: scale(1.05);
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.black-bar {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.join-button {
+  font-size: 18px;
+}
+
+.input-container label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-container input[type="text"] {
+  width: 200px;
+}
+
+.black-bar p {
+  margin: 0;
+}
+
+.theme-dropdown {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.theme-dropdown select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.github-link {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+.github-link a {
+  color: #333333;
+  text-decoration: none;
+}
+
+.dark-theme {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.light-theme {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+        </style>
+    </head>
+    <body>
+        <div class="black-bar">
+        If you're gonna use this to skid, get a job nobody loves you.
+    </div>
+        <div class="input-container">
+            <h1>RoUWP</h1>
+            <h4>Join a specific game instance on Roblox UWP.</h4>
+            <input type="text" id="gameID" placeholder="Game ID">
+            <input type="text" id="jobID" placeholder="Job ID">
+            <button class="join-button" id="joinButton">Join</button>
+        </div>
+
+        <div class="github-link">
+            <a href="https://github.com/CrispTails">
+  <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" style="height: 1em; vertical-align: middle;">
+  GitHub
+</a>
+
+        </div>
+
+        <div class="theme-dropdown">
+            <label for="theme">Choose Theme:</label>
+            <select id="theme" onchange="changeTheme()">
+                <option value="light">Light Theme</option>                
+                <option value="dark">Dark Theme</option>
+            </select>
+        </div>
+
+        <script>
+            const gameIDInput = document.getElementById('gameID');
+            const jobIDInput = document.getElementById('jobID');
+            const joinButton = document.getElementById('joinButton');
+            const body = document.querySelector('body');
+            
+            const hoverSound = new Audio('https://raw.githubusercontent.com/CrispTails/main/main/hover.wav');
+            const clickSound = new Audio('https://raw.githubusercontent.com/CrispTails/main/main/click.wav');
+
+            joinButton.addEventListener('mouseover', () => {
+                hoverSound.play();
+            });
+
+            joinButton.addEventListener('click', () => {
+                clickSound.play();
+                const gameID = gameIDInput.value;
+                const jobID = jobIDInput.value;
+                if (gameID && jobID) {
+                    const url = `roblox://placeID=${gameID}&gameInstanceId=${jobID}`;
+                    window.open(url, '_blank');
+                } else {
+                    alert("Could not join because the Job ID or Game ID or both have missing inputs.");
+                }
+            });
+
+            function changeTheme() {
+                const themeSelect = document.getElementById('theme');
+                if (themeSelect.value === 'light') {
+                    body.classList.remove('dark-theme');
+                    body.classList.add('light-theme');
+                } else {
+                    body.classList.remove('light-theme');
+                    body.classList.add('dark-theme');
+                }
+            }
+        </script>
+    </body>
+</html>
