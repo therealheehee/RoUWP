@@ -1,4 +1,6 @@
 # RoUWP
 Gives you the ability to join a ROBLOX Game in a specific server on the UWP version of ROBLOX..
-# What's the use for this?
-can you read?
+# This isn't legit I'm reporting 😡😡😡
+check the source code.
+# What about private servers?
+that's a feature still WIP.
