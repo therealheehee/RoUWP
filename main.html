@@ -1,247 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RoUWP</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Roboto', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to bottom, #2C2C2C, #1f1f1f);
+      }
+
+      .container {
+        position: relative;
+        max-width: 400px;
+        padding: 30px;
+        background: #383838;
+        border-radius: 20px;
+        color: #eee;
+        box-shadow:
+          0 15px 35px rgba(0, 0, 0, 0.4),
+          inset 0 0 20px rgba(0, 0, 0, 0.2),
+          inset 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+
+
+      h1 {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #fff;
+      }
+
+      h4 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: #aaa;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 16px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+        border: 2px solid #4d4d4d;
+        background: #585858;
+        color: #fff;
+        transition: all 0.3s ease;
+        box-shadow:
+          0 8px 16px rgba(0, 0, 0, 0.3),
+          inset 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      input[type="text"]:hover {
+        border-color: #808080;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #00b06f;
+        box-shadow:
+          0 8px 16px rgba(0, 0, 0, 0.3),
+          0 0 0 4px rgba(0, 176, 111, 0.3),
+          inset 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+
+
+      .join-button {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        padding: 16px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(to right, #008c5a, #00b06f);
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.5s, filter 0.5s;
+        box-shadow: 0 0 10px rgba(0, 140, 90, 0.5), 0 0 20px rgba(0, 176, 111, 0.7), inset 0 0 1px #00e1a1;
+      }
+
+      .join-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(0, 176, 111, 0.7), 0 0 30px rgba(0, 243, 179, 0.9), inset 0 0 1px #00e1a1;
+        filter: brightness(1.2) saturate(1.2);
+      }
+
+      .join-button:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 0.1) 100%);
+        animation: shimmer 1.5s infinite linear;
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-200%);
         }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #1f1f1f;
+        100% {
+          transform: translateX(200%);
         }
+      }
 
-        .container {
-            position: relative;
-            max-width: 400px;
-            padding: 20px;
-            background-color: #303030;
-            border-radius: 5px;
-            color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
 
-        h1 {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #fff;
-        }
+      .black-bar {
+        background: #333;
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
 
-        h4 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: #aaa;
-        }
+      .theme-dropdown {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
 
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #424242;
-            color: #fff;
-        }
+      .theme-dropdown select {
+        padding: 8px;
+        border: 1px solid #555;
+        border-radius: 5px;
+      }
 
-        .join-button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            color: #fff;
-            background-color: #008C5A;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
+      .github-link {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+      }
 
-        .join-button:hover {
-            background-color: #00B06F;
-            transform: scale(1.05);
-        }
+      .github-link a {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 15px;
+        padding: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s, box-shadow 0.5s;
+      }
 
-        .black-bar {
-            background-color: #000;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-        }
+      .github-link a:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      }
 
-        .theme-dropdown {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+      .github-link img {
+        width: 100px;
+        height: auto;
+        margin-right: -80px;
+      }
 
-        .theme-dropdown select {
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
 
-        .github-link {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-        }
+      .dark-theme {
+        background: #222;
+        color: #fff;
+      }
 
-        .github-link a {
-            color: #fff;
-            text-decoration: none;
-        }
+      .light-theme {
+        background: #fff;
+        color: #333;
+      }
 
-        .dark-theme {
-            background-color: #000;
-            color: #fff;
-        }
+      .info-icon {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        font-size: 28px;
+        color: #fff;
+        cursor: pointer;
+      }
 
-        .light-theme {
-            background-color: #fff;
-            color: #000;
-        }
-
-        /* Icon and Notification Module */
-        .info-icon {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-size: 24px;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        .notification {
+      .notification {
         display: none;
         position: absolute;
-        top: 20px;
+        top: 30px;
         right: -320px;
         width: 300px;
         padding: 20px;
-        background-color: #444;
+        background: #555;
         color: #fff;
-        transition: right 0.3s;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        transition: right 0.5s ease-in-out;
+      }
+
+      .notification.active {
+        right: 30px;
+        display: block;
+        animation: slideIn 0.5s ease-in-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
         }
 
-        .notification.active {
-            right: 20px;
-            display: block;
+        to {
+          transform: translateX(0);
         }
+      }
 
-        .notification h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
+      .notification h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
 
-        .notification p {
-            font-size: 14px;
-            line-height: 1.5;
-        }
+      .notification p {
+        font-size: 16px;
+        line-height: 1.6;
+      }
 
-        .notification a {
-            color: #fff;
-            text-decoration: none;
-        }
-    .notification a.learn-more {
+      .notification a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .notification a.learn-more {
         color: #008CFF;
         text-decoration: none;
         font-weight: bold;
         transition: color 0.3s;
-    }
+      }
 
-    .notification a.learn-more:hover {
+      .notification a.learn-more:hover {
         color: #00AFFF;
-    }
+      }
 
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
     <div class="black-bar">
-        Get owned Script Kiddies. v3rmillion is going down, you can't exploit on windows no more, etc. LOL!
+      Get owned Script Kiddies. v3rmillion is going down, you can't exploit on windows no more, etc. LOL!
     </div>
 
     <div class="container">
-        <h1>RoUWP</h1>
-        <h4>Join a specific game instance on Roblox UWP.</h4>
-        <input type="text" id="gameID" placeholder="Game ID">
-        <input type="text" id="jobID" placeholder="Job ID">
-        <button class="join-button" id="joinButton">Join</button>
+      <h1>RoUWP</h1>
+      <h4>Join a specific game instance on Roblox UWP.</h4>
+      <input type="text" id="gameID" placeholder="Game ID">
+      <input type="text" id="jobID" placeholder="Job ID">
+      <button class="join-button" id="joinButton">Join</button>
     </div>
 
     <div class="info-icon" onclick="toggleNotification()">
-        &#9432;
+      &#9432;
     </div>
 
     <div class="notification" id="notification">
-        <h3>About RoUWP</h3>
-<p>This little project I made allows people to join a specific game instance in the Microsoft Store version of Roblox. This wasn't intended for exploiting purposes, it was for simply people who wanna be an autistic and stalk people on Roblox. <a href="https://github.com/CrispTails/RoUWP/tree/main" class="learn-more">Click here to go to the GitHub page.</a> CHANGELOG: Updated UI, that's it lmao</p>
+      <h3>About RoUWP</h3>
+      <p>This little project I made allows people to join a specific game instance in the Microsoft Store version of Roblox. This wasn't intended for exploiting purposes, it was for simply people who wanna be an autistic and stalk people on Roblox.
+        <a href="https://github.com/CrispTails/RoUWP/tree/main" class="learn-more">Click here to go to the GitHub page.</a> CHANGELOG: Big UI Change :3</p>
 
     </div>
 
     <div class="github-link">
-        <a href="https://github.com/CrispTails">
-            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="github" style="height: 1em; vertical-align: middle;">
-            my github
-        </a>
+      <a href="https://github.com/CrispTails" target="_blank">
+        <img src="https://github.githubassets.com/assets/GitHub-Logo-ee398b662d42.png" alt="GitHub Logo">
+        <span style="opacity: 0;">Visit GitHub</span>
+      </a>
     </div>
 
+
     <script>
-        const gameIDInput = document.getElementById('gameID');
-        const jobIDInput = document.getElementById('jobID');
-        const joinButton = document.getElementById('joinButton');
-        const body = document.querySelector('body');
-        const notification = document.getElementById('notification');
+      const gameIDInput = document.getElementById('gameID');
+      const jobIDInput = document.getElementById('jobID');
+      const joinButton = document.getElementById('joinButton');
+      const body = document.querySelector('body');
+      const notification = document.getElementById('notification');
 
-        const hoverSound = new Audio('https://raw.githubusercontent.com/CrispTails/main/main/hover.wav');
-        const clickSound = new Audio('https://raw.githubusercontent.com/CrispTails/main/main/click.wav');
+      const hoverSound = new Audio('https://raw.githubusercontent.com/CrispTails/main/main/hover.wav');
+      const clickSound = new Audio('https://raw.githubusercontent.com/CrispTails/main/main/click.wav');
 
-        joinButton.addEventListener('mouseover', () => {
-            hoverSound.play();
-        });
+      joinButton.addEventListener('mouseover', () => {
+        hoverSound.play();
+      });
 
-        joinButton.addEventListener('click', () => {
-            clickSound.play();
-            const gameID = gameIDInput.value;
-            const jobID = jobIDInput.value;
-            if (gameID && jobID) {
-                const url = `roblox://placeID=${gameID}&gameInstanceId=${jobID}`;
-                window.open(url, '_blank');
-            } else {
-                alert("Could not join because the Job ID or Game ID or both have missing inputs.");
-            }
-        });
-
-        function changeTheme() {
-            const themeSelect = document.getElementById('theme');
-            
-            if (themeSelect.value === 'light') {
-                body.classList.remove('dark-theme');
-                body.classList.add('light-theme');
-            } else {
-                body.classList.remove('light-theme');
-                body.classList.add('dark-theme');
-            }
+      joinButton.addEventListener('click', () => {
+        clickSound.play();
+        const gameID = gameIDInput.value;
+        const jobID = jobIDInput.value;
+        if (gameID && jobID) {
+          const url = `roblox://placeID=${gameID}&gameInstanceId=${jobID}`;
+          window.open(url, '_blank');
+        } else {
+          alert("Could not join because the Job ID or Game ID or both have missing inputs.");
         }
+      });
 
-        function toggleNotification() {
-            notification.classList.toggle('active');
+      function changeTheme() {
+        const themeSelect = document.getElementById('theme');
+
+        if (themeSelect.value === 'light') {
+          body.classList.remove('dark-theme');
+          body.classList.add('light-theme');
+        } else {
+          body.classList.remove('light-theme');
+          body.classList.add('dark-theme');
         }
+      }
+
+      function toggleNotification() {
+        notification.classList.toggle('active');
+      }
+
     </script>
-</body>
+  </body>
+
 </html>
