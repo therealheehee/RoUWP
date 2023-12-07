@@ -250,7 +250,88 @@
       .notification a.learn-more:hover {
         color: #00AFFF;
       }
+      
+.msstore-button {
+  position: fixed;
+  bottom: 28px;
+  left: 180px;
+  display: flex;
+  align-items: center;
+}
 
+.msstore-button a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  background: linear-gradient(to right, #0078d4, #0072c6);
+  padding: 12px;
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.5s;
+  box-shadow: 0 0 10px rgba(0, 114, 211, 0.5), 0 0 20px rgba(0, 114, 211, 0.7), inset 0 0 1px #0078d4;
+}
+
+.msstore-button a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 114, 211, 0.7), 0 0 30px rgba(0, 135, 247, 0.9), inset 0 0 1px #0078d4;
+  filter: brightness(1.2) saturate(1.2);
+}
+
+.msstore-button img {
+  width: 30px;
+  height: auto;
+  margin-right: 10px;
+}
+
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999;
+    }
+
+    .loading-spinner {
+      border: 4px solid rgba(0, 176, 111, 0.7);
+      border-top: 4px solid #fff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .loading-text {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    .loading-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
     </style>
   </head>
 
@@ -273,7 +354,19 @@
         <span style="opacity: 0;">Visit GitHub</span>
       </a>
     </div>
+    
+        <div class="msstore-button">
+      <a href="ms-windows-store://pdp/?ProductId=9nblgggzm6wm">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/08/Microsoft_Store_app_icon.png" alt="Microsoft Store Icon">
+        Get UWP Roblox
+      </a>
+    </div>
 
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Opening Roblox...</div>
+    <div class="loading-close" onclick="closeLoading()">X</div>
+  </div>
 
     <script>
       const gameIDInput = document.getElementById('gameID');
@@ -281,6 +374,9 @@
       const joinButton = document.getElementById('joinButton');
       const body = document.querySelector('body');
       const notification = document.getElementById('notification');
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      const loadingSpinner = document.querySelector('.loading-spinner');
+      const loadingText = document.querySelector('.loading-text');
 
       const hoverSound = new Audio('https://raw.githubusercontent.com/CrispTails/main/main/hover.wav');
       const clickSound = new Audio('https://raw.githubusercontent.com/CrispTails/main/main/click.wav');
@@ -295,7 +391,8 @@
         const jobID = jobIDInput.value;
         if (gameID && jobID) {
           const url = `roblox://placeID=${gameID}&gameInstanceId=${jobID}`;
-          window.open(url, '_blank');
+          window.location.href = url;
+          showLoading();
         } else {
           alert("Could not join because the Job ID or Game ID or both have missing inputs.");
         }
@@ -316,7 +413,22 @@
       function toggleNotification() {
         notification.classList.toggle('active');
       }
-
+      
+    function showLoading() {
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      loadingOverlay.style.display = 'flex';
+      setTimeout(() => {
+        loadingOverlay.style.opacity = 1;
+      }, 0);
+    }
+    
+    function closeLoading() {
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      loadingOverlay.style.opacity = 0;
+      setTimeout(() => {
+        loadingOverlay.style.display = 'none';
+      }, 500);
+    }
     </script>
   </body>
 
