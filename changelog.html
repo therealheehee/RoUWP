@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoUWP Changelog</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to bottom, #2C2C2C, #1f1f1f);
+    }
+
+    .container {
+      position: relative;
+      max-width: 800px;
+      padding: 30px;
+      background: #383838;
+      border-radius: 20px;
+      color: #eee;
+      box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.4),
+        inset 0 0 20px rgba(0, 0, 0, 0.2),
+        inset 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #aaa;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .changelog-item {
+      margin-bottom: 20px;
+    }
+
+    .changelog-item-date {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .github-link {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+    }
+
+    .github-link a {
+      display: flex;
+      align-items: center;
+      color: #fff;
+      text-decoration: none;
+      background: #fff;
+      border-radius: 15px;
+      padding: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s, box-shadow 0.5s;
+    }
+
+    .github-link a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .github-link img {
+      width: 100px;
+      height: auto;
+      margin-right: -80px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>RoUWP Changelog</h1>
+
+    <div class="changelog-item">
+      <h3>Version 1.0.0</h3>
+      <p>Initial Release</p>
+      <p class="changelog-item-date">September 27th, 2023</p>
+    </div>
+
+    <div class="changelog-item">
+      <h3>Version 1.1.0</h3>
+      <p>1-month anniversary, UI improvement.</p>
+      <p class="changelog-item-date">October 27th, 2023</p>
+    </div>
+
+    <div class="changelog-item">
+      <h3>Version 1.2.0</h3>
+      <p>Huge UI Improvement, new loading screen, new github & MSStore button</p>
+      <p class="changelog-item-date">December 6th, 2023</p>
+    </div>
+  </div>
+
+  <div class="github-link">
+    <a href="https://github.com/therealheehee" target="_blank">
+      <img src="https://github.githubassets.com/assets/GitHub-Logo-ee398b662d42.png" alt="GitHub Logo">
+      <span style="opacity: 0;">Visit GitHub</span>
+    </a>
+  </div>
+
+  <script>
+    console.log("this is a bruh moment.")
+  </script>
+</body>
+
+</html>
